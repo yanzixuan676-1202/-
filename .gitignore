@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.pnpm-store/
+.vite/
+.sites-checkout/
+.sites-runtime/
+.DS_Store

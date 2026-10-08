@@ -1,0 +1,42 @@
+.border-glow-card {
+  --edge-glow: 0;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-angle: 45deg;
+  position: relative;
+  isolation: isolate;
+}
+
+.border-glow-aura {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  padding: 1px;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: var(--edge-glow);
+  background:
+    conic-gradient(from calc(var(--glow-angle) - 36deg) at 50% 50%, transparent 0deg 276deg, rgba(64, 157, 255, .1) 290deg, rgba(91, 193, 255, .85) 307deg, rgba(234, 252, 255, 1) 326deg, rgba(86, 177, 255, .72) 345deg, transparent 360deg),
+    radial-gradient(180px circle at var(--glow-x) var(--glow-y), rgba(230, 250, 255, .96), rgba(123, 205, 255, .76) 24%, rgba(63, 147, 255, .24) 49%, transparent 72%);
+  transition: opacity .14s ease-out;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.border-glow-aura::after {
+  position: absolute;
+  z-index: -1;
+  inset: -14px;
+  content: '';
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: .95;
+  background: radial-gradient(134px circle at calc(var(--glow-x) + 14px) calc(var(--glow-y) + 14px), rgba(67, 170, 255, .72), rgba(67, 170, 255, .22) 38%, transparent 68%);
+  filter: blur(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-glow-aura { transition: none; }
+}
